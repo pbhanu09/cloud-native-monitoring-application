@@ -1,8 +1,16 @@
+# base image
 From Python:3.10-slim-buster
+# create a working directory
 Workdir /usr/app
+# copy the installation libraries
 COPY ./requirements.txt ./
+# Execute the lib available in req.txt file
 RUN pip3 install --no-cache-dir -r requirements.txt
+# Copy the project from local to docker work direcotry
 COPY ./ ./
+# create the running envr
 ENV FLASK_RUN_HOST= 0.0.0.0
+# expose the port
 EXPOSE 5000
+# execute the flask solution
 CMD ["FLASK" , "run"]
