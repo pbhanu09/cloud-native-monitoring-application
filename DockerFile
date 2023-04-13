@@ -6,7 +6,7 @@ Workdir /usr/app
 COPY ./requirements.txt ./
 # Execute the lib available in req.txt file
 RUN pip3 install --no-cache-dir -r requirements.txt
-# Copy the project from local to docker work direcotry
+# Copy the project from local to docker work directory
 COPY ./ ./
 # create the running envr
 ENV FLASK_RUN_HOST= 0.0.0.0
