@@ -1,0 +1,42 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: devops-deploy
+  labels: 
+     app: cloud-native
+
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: cloud-native
+
+  template:
+    metadata:
+      labels:
+        app: cloud-native
+    spec:
+      containers:
+      - name: cloud-native
+        image: 598189156151.dkr.ecr.ap-northeast-1.amazonaws.com/my_monitoring_app_image:latest
+        ports:
+        - containerPort: 5000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-service
+  labels:
+    app: cloud-native
+spec:
+  selector:
+    app: cloud-native 
+
+  ports:
+    - port: 5000
+      targetPort: 5000
+
+  type: LoadBalancer
+
